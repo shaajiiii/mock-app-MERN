@@ -1,0 +1,3 @@
+react port 3000
+node port 7000
+mock-app is the application name
