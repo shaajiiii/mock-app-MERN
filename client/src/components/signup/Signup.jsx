@@ -22,9 +22,26 @@ function Signup() {
 			email:email,
 			password:password
 		}
-		let resp = await axios.post("http://localhost:7000/signup",SignUpData);
-		console.log(SignUpData);
-		console.log(resp);
+		try {
+			let resp = await axios.post("http://localhost:7000/signup",SignUpData);
+			//console.log(SignUpData);
+			console.log(resp);
+			if(resp.status === 201){
+				setError('');setEmail('');setFirstName('');setLastName('');setPassword('');
+			}
+			
+		} catch (error) {
+			if(error.response.status===400){
+				//console.log('inside if');
+				setError(error.response.data.message)
+				//console.log(error.response.data.message);
+			}else{
+				console.log(error);
+			}
+	
+		}
+		
+		// console.log(resp);
 	}
 
 	//test function M
@@ -61,6 +78,7 @@ function Signup() {
 							required
 							className='sinput'
 							onChange={(e)=>{setFirstName(e.target.value)}}
+							value={firstName}
 						/>
 						<input
 							type="text"
@@ -69,6 +87,7 @@ function Signup() {
 							required
 							className='sinput'
 							onChange={(e)=>{setLastName(e.target.value)}}
+							value={lastName}
 						/>
 						<input
 							type="email"
@@ -77,6 +96,7 @@ function Signup() {
 							required
 							className='sinput'
 							onChange={(e)=>{setEmail(e.target.value)}}
+							value={email}
 						/>
 						<input
 							type="password"
@@ -85,15 +105,18 @@ function Signup() {
 							required
 							className='sinput'
 							onChange={(e)=>{setPassword(e.target.value)}}
+							value={password}
 						/>
 
-						{error && <div className='serror_msg'> static error msg</div>}
+						{error && <div className='serror_msg'> {error}</div>}
 
 						<button type="submit" className='sgreen_btn'>
 							Sign Up
 						</button>
-						<button onClick={() => setError("oru error adich")}> seterror</button>
-						<button onClick={testSomething}> test something</button>
+					
+						<button onClick={testSomething}> invoke test function .. {
+							
+						}</button>
 					</form>
 				</div>
 			</div>
