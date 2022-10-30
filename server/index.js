@@ -1,6 +1,7 @@
 require('dotenv').config();
 // console.log(process.env)
 const express = require('express');
+const cors = require('cors')
 const app = express();
 const PORT = process.env.PORT ;
 const mongoose = require('mongoose');
@@ -14,19 +15,24 @@ mongoose.connect(process.env.DATABASE_URL,(err)=>{
 });
 //routes import
 const userLogin = require('./routes/user-login');
+const userSignup = require('./routes/user-sign-up')
 
 
 //middelwares
-app.use(express.json())
+app.use(express.json());
+app.use(cors());
 
 
 //routing
 app.use('/login',userLogin)
+app.use('/signup',userSignup)
 
-app.get('/', function (req, res) {
+
+
+// app.get('/', function (req, res) {
  
-    res.send({text:"helloOOOOOOOOOOOOOOOOOOOOOOOOOOO world"})
-})
+//     res.send({text:"helloOOOOOOOOOOOOOOOOOOOOOOOOOOO world"})
+// })
 
 
 

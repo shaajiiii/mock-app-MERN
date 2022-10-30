@@ -1,10 +1,43 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Signup.css'
+import axios from 'axios'
+import './Signup.css';
 
 
 function Signup() {
-	const [error, setError] = useState('')
+	const [error, setError] = useState('');
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+
+
+
+	let handleSubmit = async (e)=>{	
+		e.preventDefault();
+		console.log("handled sumbit fired====");
+		let SignUpData = {
+			firstName: firstName,
+			lastName:lastName,
+			email:email,
+			password:password
+		}
+		await axios.post("http://localhost:7000/signup",SignUpData);
+		console.log(SignUpData);
+	}
+
+	//test function M
+	let testSomething = ()=>{
+		let SignUpData = {
+			firstName: firstName,
+			lastName:lastName,
+			email:email,
+			password:password
+		}
+		console.log("test fuction log===");
+		console.log(SignUpData);
+	}
+	
 	return (
 		<div className='signup_container'>
 			<div className='signup_form_container'>
@@ -18,7 +51,7 @@ function Signup() {
 				</div>
 
 				<div className='sright'>
-					<form className='sform_container' >
+					<form className='sform_container' onSubmit={handleSubmit} >
 						<h1>Create Account</h1>
 						<input
 							type="text"
@@ -26,6 +59,7 @@ function Signup() {
 							name="firstName"
 							required
 							className='sinput'
+							onChange={(e)=>{setFirstName(e.target.value)}}
 						/>
 						<input
 							type="text"
@@ -33,6 +67,7 @@ function Signup() {
 							name="lastName"
 							required
 							className='sinput'
+							onChange={(e)=>{setLastName(e.target.value)}}
 						/>
 						<input
 							type="email"
@@ -40,6 +75,7 @@ function Signup() {
 							name="email"
 							required
 							className='sinput'
+							onChange={(e)=>{setEmail(e.target.value)}}
 						/>
 						<input
 							type="password"
@@ -47,6 +83,7 @@ function Signup() {
 							name="password"
 							required
 							className='sinput'
+							onChange={(e)=>{setPassword(e.target.value)}}
 						/>
 
 						{error && <div className='serror_msg'> static error msg</div>}
@@ -55,6 +92,7 @@ function Signup() {
 							Sign Up
 						</button>
 						<button onClick={() => setError("oru error adich")}> seterror</button>
+						<button onClick={testSomething}> test something</button>
 					</form>
 				</div>
 			</div>
