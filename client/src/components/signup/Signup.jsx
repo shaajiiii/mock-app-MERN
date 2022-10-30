@@ -22,8 +22,9 @@ function Signup() {
 			email:email,
 			password:password
 		}
-		await axios.post("http://localhost:7000/signup",SignUpData);
+		let resp = await axios.post("http://localhost:7000/signup",SignUpData);
 		console.log(SignUpData);
+		console.log(resp);
 	}
 
 	//test function M
