@@ -1,17 +1,49 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Login() {
-
+ 
     const [error, setError] = useState('');
+    const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+
+
+    //login function 
+    let handleLogin = async (e)=>{
+        e.preventDefault()
+        let LoginData = {
+            email:email,
+            password:password
+        }
+        try {
+            let resp = await axios.post("http://localhost:7000/login",LoginData);
+            if(resp.status === 200){
+                localStorage.setItem("token", resp.data);
+                window.location ='/'
+                
+            }
+            
+        } catch (error) {
+            if(error.response.status===400){
+                console.log(error);
+				//console.log('inside if');
+				setError(error.response.data.message)
+				//console.log(error.response.data.message);
+			}else{
+				console.log(error);
+			}
+        }
+
+    }
 
 
     return (
         <div className='login_container'>
             <div className='login_form_container'>
                 <div className='left'>
-                    <form className='form_container' >
+                    <form className='form_container' onSubmit={handleLogin}>
                         <h1>Login to Your Account</h1>
                         <input
                             type="email"
@@ -19,6 +51,8 @@ function Login() {
                             name="email"
                             required
                             className='input'
+                            onChange={(e)=>{setEmail(e.target.value)}}
+							value={email}
                         />
                         <input
                             type="password"
@@ -26,9 +60,11 @@ function Login() {
                             name="password"
                             required
                             className='input'
+                            onChange={(e)=>{setPassword(e.target.value)}}
+							value={password}
                         />
 
-                        {error && <div className='error_msg'>There si(static) an error</div>}
+                        {error && <div className='error_msg'>{error}</div>}
 
                         <button type="submit" className='green_btn'>
                             Log In
