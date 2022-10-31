@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import './Signup.css';
 
 
 function Signup() {
+	const navigate = useNavigate();
+	//states
 	const [error, setError] = useState('');
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -25,9 +27,11 @@ function Signup() {
 		try {
 			let resp = await axios.post("http://localhost:7000/signup",SignUpData);
 			//console.log(SignUpData);
-			console.log(resp);
+			//console.log(resp);
 			if(resp.status === 201){
 				setError('');setEmail('');setFirstName('');setLastName('');setPassword('');
+				navigate('/')
+
 			}
 			
 		} catch (error) {

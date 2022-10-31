@@ -1,18 +1,25 @@
 const router = require("express").Router();
-const Joi = require('joi')
+const Joi = require('joi');
+const {User} = require('../models/userModel')
 
 
-router.post('/', (req, res) => {
-    console.log(req.body);
+router.post('/',async (req, res) => {
+    //console.log(req.body);
     let {error} = validateData(req.body)
     if (error)
 		return res.status(400).send({ message: error.details[0].message });
-    res.status(201).send("sign up reached") // success responese...
+
+    await new User(req.body).save();
+    res.status(201).send("User Created Successfully") // success responese...
 })
 
 
 
-// validation function
+
+//==========================================================//
+
+
+// validation function=
 // this function returns an object and it will have an error field if there is an error
 const validateData = (signupData) => {
     const schema = Joi.object({
