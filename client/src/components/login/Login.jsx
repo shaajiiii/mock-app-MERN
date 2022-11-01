@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './Login.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function Login() {
  
+   
     const [error, setError] = useState('');
     const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+
+    let checkuser = ()=>{
+        const user = localStorage.getItem('token')
+        if(user){
+            window.location = '/';
+        } 
+
+    }
+
+    useEffect(()=>{
+        checkuser();
+    },[]);
 
 
     //login function 
@@ -69,7 +82,7 @@ function Login() {
                         <button type="submit" className='green_btn'>
                             Log In
                         </button>
-                        <button onClick={() => setError('error adich')}>set error</button>
+                       
                     </form>
                 </div>
                 <div className='right'>
