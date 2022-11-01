@@ -20,8 +20,9 @@ function UserHome() {
     const [Describe_value, setValue] = useState("");
 
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async(e)=>{
         e.preventDefault()
+        const usertoken = localStorage.getItem('token')  // for now this is the id, need to use JWT
         const applicationData = {
             companyName,
             address,
@@ -33,10 +34,16 @@ function UserHome() {
             Describe_company,
             Describe_problem,
             Describe_solution,
-            Describe_value
+            Describe_value,
+            token:usertoken
 
         }
         console.log(applicationData);
+        try {
+            let applyResponse = await axios.post('http://localhost:7000/login/submit-application',applicationData) 
+        } catch (error) {
+            
+        }
     }
 
     const logout = ()=>{

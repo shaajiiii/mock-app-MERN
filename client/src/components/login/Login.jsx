@@ -33,7 +33,8 @@ function Login() {
         try {
             let resp = await axios.post("http://localhost:7000/login",LoginData);
             if(resp.status === 200){
-                localStorage.setItem("token", resp.data);
+                localStorage.setItem("token", resp.data.token);// this has user id
+                //console.log(resp.data.token);
                 window.location ='/'
                 
             }

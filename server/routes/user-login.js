@@ -20,7 +20,7 @@ router.post('/',async (req,res)=>{
     if(user.password!==req.body.password){
         return res.status(400).send({ message:"Invalid email or password.."});
     }else{
-        res.status(200).send({message:"Login success" });
+        res.status(200).send({token:user._id});
     }
 
     console.log('user  found ===');
@@ -29,6 +29,20 @@ router.post('/',async (req,res)=>{
 
 
     
+})
+
+
+
+router.post('/submit-application', async (req,res)=>{
+    console.log('app submit route');
+    //let user = null;
+    let user = await User.findById("63451011542801347978a454");
+    
+    console.log(user);
+    /////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!=========== paused here.. 
+    // fetched user. store that data into application. store application, before that, create apllication model.
+    
+   // console.log(req.body)
 })
 
 
