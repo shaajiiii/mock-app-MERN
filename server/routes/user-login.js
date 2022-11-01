@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const {User} = require('../models/userModel');
+const {application} = require('../models/applicationModel')
 const Joi = require('joi');
 
 
@@ -32,13 +33,35 @@ router.post('/',async (req,res)=>{
 })
 
 
+//=== SUBITION OF APPLICATION
 
 router.post('/submit-application', async (req,res)=>{
     console.log('app submit route');
-    //let user = null;
-    let user = await User.findById("63451011542801347978a454");
     
+    //data validation here
+    let {error} = validateApplicationData(req.body)
+    if (error)
+		return res.status(400).send({ error: error.details[0].message }); // validation error
+
+    let user = await User.findById(req.body.token);
     console.log(user);
+    // not user aanel sent error
+    if(!user){
+        console.log("rejected");
+        return res.status(400).send({error :"request authentication failed..."})
+    }
+
+    
+    req.body.user_data= user;
+    req.body.status = "applied"
+
+    await new application(req.body).save();
+
+    res.status(201).send("Applied successfully")
+
+    
+    
+    //console.log(user);
     /////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!=========== paused here.. 
     // fetched user. store that data into application. store application, before that, create apllication model.
     
@@ -46,15 +69,39 @@ router.post('/submit-application', async (req,res)=>{
 })
 
 
-//===============================//
-const validateData = (signupData) => {
+//=============================== APPLICATION DATA VALIDATION//
+const validateApplicationData = (applicationData) => {
+    const schema = Joi.object({
+        companyName: Joi.string().required().label("company name"),
+        address:Joi.string().alphanum().required().label("address"),
+        city:Joi.string().required().label("city"),
+        state:Joi.string().required().label("state"),
+        email:Joi.string().email().required().label("Email"),
+        phone:Joi.string().regex(/^[0-9]{10}$/).messages({'string.pattern.base': `Phone number should contain only 10 digits.`}).required(),
+        Describe_team:Joi.string().alphanum().required().label("team description"),
+        Describe_company:Joi.string().alphanum().required().label("company description"),
+        Describe_problem:Joi.string().alphanum().required().label("problem description"),
+        Describe_solution:Joi.string().alphanum().required().label("solution description"),
+        Describe_value:Joi.string().alphanum().required().label("value description"),
+        token:Joi.required()
+        
+    })
+
+    return schema.validate(applicationData)
+
+}
+
+
+//=========== LOGIN DATA VALIDATION
+
+const validateData = (LoginData) => {
     const schema = Joi.object({
         email: Joi.string().email().required().label("Email"),
         password: Joi.required().label("Password"),
 
     })
 
-    return schema.validate(signupData)
+    return schema.validate(LoginData)
 
 }
 

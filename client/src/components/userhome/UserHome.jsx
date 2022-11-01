@@ -2,9 +2,18 @@ import React, { useState } from 'react';
 import './UserHome.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 function UserHome() {
+
+    //toastify
+    const notifyerror = (msg) => toast.error(msg);
+    const notify = (msg) =>toast(msg)
+
+    
     //states
     const [companyName, setCompanyName] = useState("");
     const [address, setAddress] = useState("");
@@ -38,11 +47,32 @@ function UserHome() {
             token:usertoken
 
         }
-        console.log(applicationData);
+        //console.log(applicationData);
         try {
             let applyResponse = await axios.post('http://localhost:7000/login/submit-application',applicationData) 
+            console.log("axios respone in try");
+            if(applyResponse.status ===201){
+
+                notify(applyResponse.data + ". Please wait for confirmation to continue forward..\n Thank you");
+                setCompanyName('');
+                setAddress('');
+                setCity('');
+                setState('');
+                setEmail('');
+                setPhone('');
+                setTeamDescription('');
+                setCompanyDescription('');
+                setDescribeProblem('');
+                setSolution('');
+                setValue('');
+                
+                
+            }
         } catch (error) {
-            
+            if(error.response.status===400){
+                console.log(error.response.data.error);
+                notifyerror(error.response.data.error)
+            }
         }
     }
 
@@ -52,8 +82,21 @@ function UserHome() {
     }
 
     return (
+        
 
         <div className="row home-container">
+            <ToastContainer
+            position="top-left"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+             />
 
             <img src="/logout.png" alt="" title='logout' className='logut-Btn'  onClick={logout}/>
 
