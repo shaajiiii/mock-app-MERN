@@ -15,7 +15,9 @@ mongoose.connect(process.env.DATABASE_URL,(err)=>{
 });
 //routes import
 const userLogin = require('./routes/user-login');
-const userSignup = require('./routes/user-sign-up')
+const userSignup = require('./routes/user-sign-up');
+const adminLogin = require('./routes/admin-login');
+
 
 
 //middelwares
@@ -27,6 +29,7 @@ app.use(cors());
 
 app.use('/login',userLogin)
 app.use('/signup',userSignup)
+app.use('/admin-login',adminLogin)
 
 
 
