@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Header from '../AdminHeader/Header';
+
 
 function AdminHome() {
   return (
     <div>
-        <h1>admin home page!</h1>
+        
+        <Header/>
       
     </div>
   )
