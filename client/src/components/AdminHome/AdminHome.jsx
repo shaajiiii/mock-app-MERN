@@ -6,8 +6,12 @@ function AdminHome() {
   return (
     <div>
         
+        {/* Header is the side bar component */}
+
         <Header/>
-      
+
+
+
     </div>
   )
 }

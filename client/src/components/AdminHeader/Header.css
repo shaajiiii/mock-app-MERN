@@ -62,4 +62,16 @@ label {
     height: 38px;
     width: 100px;
 }
+.icon{
+    left:5px;
+    padding:0.5rem;
+    cursor:pointer;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    
+}
 
+.icon:hover{
+
+    background-color: #8bcdc1;
+}

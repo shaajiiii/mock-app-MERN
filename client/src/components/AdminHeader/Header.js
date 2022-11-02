@@ -1,6 +1,7 @@
 
 //import useState hook to create menu collapse state
 import React, { useState } from "react";
+import { Outlet,useNavigate } from "react-router-dom";
 
 //import react pro sidebar components
 
@@ -10,6 +11,7 @@ import "./Header.css";
 
 const Header = () => {
 
+    const navigate = useNavigate()
 
     return (
         <>
@@ -23,21 +25,25 @@ const Header = () => {
             
                 
                 <div class="sidebar">
-                    <div className="icon" style={{left:"5px",padding:"0.5rem"}}>
+                    <div onClick={()=>{navigate('/admin')}} className="icon" >
                         <img src="/home.png"style={{height:"50px",width:"50px"}} alt="" />
-                        <span className="sidebar-item">Settings</span>
+                        <span className="sidebar-item">Home</span>
                     </div>
-                    <div className="icon" style={{left:"5px",padding:"0.5rem"}}>
-                        <img src="/home.png"style={{height:"50px",width:"50px"}} alt="" />
-                        <span className="sidebar-item">Settings</span>
+                    <div onClick={()=>{navigate('/admin/applications')}} className="icon" >
+                        <img src="/file.png"style={{height:"50px",width:"50px"}} alt="" />
+                        <span className="sidebar-item">Application List</span>
                     </div>
-                    <div className="icon" style={{left:"5px",padding:"0.5rem"}}>
-                        <img src="/home.png"style={{height:"50px",width:"50px"}} alt="" />
-                        <span className="sidebar-item">Settings</span>
+                    <div onClick={()=>{navigate('/admin/record-track')}} className="icon" >
+                        <img src="/calendar.png"style={{height:"50px",width:"50px"}} alt="" />
+                        <span className="sidebar-item">Record List</span>
                     </div>
-                    <div className="icon" style={{left:"5px",padding:"0.5rem"}}>
-                        <img src="/home.png"style={{height:"50px",width:"50px"}} alt="" />
-                        <span className="sidebar-item">Settings</span>
+                    <div onClick={()=>{navigate('/admin/booking')}} className="icon" >
+                        <img src="/booking.png"style={{height:"50px",width:"50px"}} alt="" />
+                        <span className="sidebar-item">Booking</span>
+                    </div>
+                    <div className="icon" >
+                        <img src="/power.png"style={{height:"50px",width:"50px"}} alt="" />
+                        <span className="sidebar-item">Log out</span>
                     </div>
                     
                    
@@ -46,9 +52,9 @@ const Header = () => {
 
 
                 {/* update every other page into this */}
-                
+
                 <div class="content-window">
-                    <h1>My Portfolio</h1>
+                   <Outlet/>
                 </div>
 
 
