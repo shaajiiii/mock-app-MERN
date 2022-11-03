@@ -69,20 +69,20 @@ router.post('/submit-application', async (req,res)=>{
 })
 
 
-//=============================== APPLICATION DATA VALIDATION//
+//=============================== APPLICATION DATA VALIDATION//  ^[a-zA-Z0-9_ ]*$
 const validateApplicationData = (applicationData) => {
     const schema = Joi.object({
         companyName: Joi.string().required().label("company name"),
-        address:Joi.string().alphanum().required().label("address"),
+        address:Joi.string().regex(/^[a-zA-Z0-9_ '\,]*$/).required().label("address"),
         city:Joi.string().required().label("city"),
         state:Joi.string().required().label("state"),
         email:Joi.string().email().required().label("Email"),
         phone:Joi.string().regex(/^[0-9]{10}$/).messages({'string.pattern.base': `Phone number should contain only 10 digits.`}).required(),
-        Describe_team:Joi.string().alphanum().required().label("team description"),
-        Describe_company:Joi.string().alphanum().required().label("company description"),
-        Describe_problem:Joi.string().alphanum().required().label("problem description"),
-        Describe_solution:Joi.string().alphanum().required().label("solution description"),
-        Describe_value:Joi.string().alphanum().required().label("value description"),
+        Describe_team:Joi.string().required().label("team description"),
+        Describe_company:Joi.string().required().label("company description"),
+        Describe_problem:Joi.string().required().label("problem description"),
+        Describe_solution:Joi.string().required().label("solution description"),
+        Describe_value:Joi.string().required().label("value description"),
         token:Joi.required()
         
     })

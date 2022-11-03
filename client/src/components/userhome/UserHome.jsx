@@ -159,7 +159,7 @@ function UserHome() {
                     </div>
 
                     <div className="form-group mb-3">
-                        <label for="exampleFormControlTextarea1">Describe your team and background</label>
+                        <h6 for="exampleFormControlTextarea1">Describe your team and background</h6>
                         <textarea 
                        className="form-control" 
                         id="exampleFormControlTextarea1" 
@@ -169,7 +169,7 @@ function UserHome() {
                         ></textarea>
                     </div>
                     <div className="form-group mb-3">
-                        <label for="exampleFormControlTextarea1">Describe your company and products</label>
+                        <h6  for="exampleFormControlTextarea1">Describe your company and products</h6 >
                         <textarea 
                         className="form-control" 
                         id="exampleFormControlTextarea1" 
@@ -179,7 +179,7 @@ function UserHome() {
                         ></textarea>
                     </div>
                     <div className="form-group mb-3">
-                        <label for="exampleFormControlTextarea1">Describe the problem you are trying to solve</label>
+                        <h6  for="exampleFormControlTextarea1">Describe the problem you are trying to solve</h6 >
                         <textarea 
                         className="form-control" 
                         id="exampleFormControlTextarea1" 
@@ -189,7 +189,7 @@ function UserHome() {
                         ></textarea>
                     </div>
                     <div className="form-group mb-3">
-                        <label for="exampleFormControlTextarea1">What is unique about your solution</label>
+                        <h6  for="exampleFormControlTextarea1">What is unique about your solution</h6 >
                         <textarea 
                         className="form-control" 
                         id="exampleFormControlTextarea1" 
@@ -200,7 +200,7 @@ function UserHome() {
                     </div>
 
                     <div className="form-group mb-3">
-                        <label for="exampleFormControlTextarea1"> What is your value proposition for your customer</label>
+                        <h6  for="exampleFormControlTextarea1"> What is your value proposition for your customer</h6 >
                         <textarea 
                         className="form-control" 
                         id="exampleFormControlTextarea1" 
