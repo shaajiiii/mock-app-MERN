@@ -5,7 +5,7 @@ import axios from 'axios';
 function NewApplicationTable() {
 
     const [applications, setNewApplications] = useState()
-
+    
     const getNewApplications = async () => {
         try {
             let res = await axios.get("http://localhost:7000/admin-applications/get-new-applications")
@@ -32,7 +32,9 @@ function NewApplicationTable() {
         }
         try {
             axios.put("http://localhost:7000/admin-applications/update-to-pending",updateData).then(()=>{
-                getNewApplications()
+                getNewApplications() 
+                
+
             })
             
             
