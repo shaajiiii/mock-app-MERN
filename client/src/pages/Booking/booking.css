@@ -1,0 +1,9 @@
+.rooms-container{
+    /* background-color: rgb(246, 246, 246); */
+    padding: 3rem;
+}
+.room{
+    background-color: orange;
+    height: 6rem;
+    border-radius: 1rem;
+}

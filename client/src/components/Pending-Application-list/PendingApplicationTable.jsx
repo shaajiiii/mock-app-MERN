@@ -4,7 +4,7 @@ import axios from 'axios';
 function PendingApplicationTable() {
 
     const [pendingApplications, setPendingApplications] = useState();
-
+   
 
     const getPendingApplications = async () => {
         try {
@@ -18,7 +18,7 @@ function PendingApplicationTable() {
             // console.log(storearr);
 
             setPendingApplications(storearrPending);
-            // console.log('state : ',applications);
+            // // console.log('state : ',applications);
         } catch (error) {
             console.log("axious error logg");
             if (error) console.log(error);

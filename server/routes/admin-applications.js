@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const {application} = require('../models/applicationModel')
+const {application} = require('../models/applicationModel');
+const {Room} = require('../models/roomModel')
 
 
 router.get('/get-new-applications',async (req,res)=>{
@@ -16,7 +17,7 @@ router.get('/get-new-applications',async (req,res)=>{
 
 router.get('/get-pending-applications',async (req,res)=>{
 
-    console.log("reached fetch pendingg");
+    //console.log("reached fetch pendingg");
    
     let pendingApplications =  await application.find({status:{$in:["pending","approved"]}})
     if(pendingApplications){

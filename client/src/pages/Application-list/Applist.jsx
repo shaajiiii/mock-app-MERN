@@ -3,6 +3,9 @@ import NewApplicationTable from '../../components/NewApplicationTable/NewApplica
 import PendingApplicationTable from '../../components/Pending-Application-list/PendingApplicationTable';
 
 function Applist() {
+  
+  
+
   return (
     <div>
       <div className='container'>

@@ -17,7 +17,8 @@ mongoose.connect(process.env.DATABASE_URL,(err)=>{
 const userLogin = require('./routes/user-login');
 const userSignup = require('./routes/user-sign-up');
 const adminLogin = require('./routes/admin-login');
-const adminApplications = require('./routes/admin-applications')
+const adminApplications = require('./routes/admin-applications');
+const roomsRouter = require('./routes/booking-rooms')
 
 
 
@@ -32,6 +33,8 @@ app.use('/login',userLogin)
 app.use('/signup',userSignup)
 app.use('/admin-login',adminLogin)
 app.use('/admin-applications',adminApplications)
+app.use('/rooms',roomsRouter)
+
 
 
 // app.get('/', function (req, res) {
