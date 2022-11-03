@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import NewApplicationTable from '../../components/NewApplicationTable/NewApplicationTable';
+import PendingApplicationTable from '../../components/Pending-Application-list/PendingApplicationTable';
 
 function Applist() {
   return (
     <div>
-        <h1> Application List</h1>      
+      <div className='container'>
+        <NewApplicationTable />
+        <PendingApplicationTable/>
+      </div>
     </div>
   )
 }
