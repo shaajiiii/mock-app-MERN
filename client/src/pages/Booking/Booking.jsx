@@ -5,11 +5,30 @@ import './booking.css';
 
 function Booking() {
 
-  const [rooms, setRooms] = useState()
+  const [rooms, setRooms] = useState();
+  const [approvedCompanies, setApprovedCompanies] = useState([]);
 
 
-  const bookRoom = ()=>{
-    console.log("book room request");
+
+  const bookRoom = async (roomNo,company) => {
+    let updateData ={
+      roomNo,
+      company
+    }
+
+    try {
+      let res = await axios.post("http://localhost:7000/rooms/book-room",updateData)
+
+      //call get all rooms here
+      if(res){
+        getAllRooms()
+      }
+
+    } catch (error) {
+      console.log("axious error logg");
+      if (error) console.log(error);
+    }
+    
   }
 
 
@@ -29,9 +48,30 @@ function Booking() {
     }
   }
 
+  const getApprovedCompanies = async () => {
+    try {
+      let res = await axios.get("http://localhost:7000/rooms/get-approved-companies")
+
+      // console.log(res);
+      let approvedCompany = res.data.approvedApplications
+      // console.log("companies==");
+      // console.log(approvedCompany);
+
+      setApprovedCompanies(approvedCompany)
+
+    } catch (error) {
+      console.log("axious error logg");
+      if (error) console.log(error);
+    }
+  }
+
+
+
+
   useEffect(() => {
     //console.log("use-Effect fired");
-    getAllRooms()
+    getAllRooms();
+    getApprovedCompanies();
 
   }, [])
 
@@ -53,11 +93,56 @@ function Booking() {
 
 
                 <div style={room.status == "available" ? { backgroundColor: '#4bd636' } : { backgroundColor: 'orange' }}
-             
 
                   className="room col-10 col-md-2 m-3">
 
-                  <h6>{room.no}</h6>
+                  <h6>Room No:{room.no}</h6>
+
+
+                  {
+                    room.status == "available" ? 
+
+                    <>
+                    
+
+                    <h6>choose a company</h6>
+
+                    <select onChange={(e)=>{bookRoom(room.no,e.target.value)}} id="company-list">
+  
+                      {
+                        approvedCompanies.map((company) => {
+  
+                          return (
+                            <option value={company}> {company} </option>
+                          )
+                        })
+                      }
+  
+                    </select>
+                    </>
+
+                     :
+
+                     <h4>{room.companyName}</h4>
+                  }
+
+                  
+
+                  {/* <h6>choose a company</h6>
+
+                  <select id="company-list">
+
+                    {
+                      approvedCompanies.map((company) => {
+
+                        return (
+                          <option value="">{company}</option>
+                        )
+                      })
+                    }
+
+                  </select> */}
+
 
                 </div>
 
@@ -66,6 +151,14 @@ function Booking() {
               );
             })
           }
+
+
+
+
+
+
+
+
 
 
         </div>
