@@ -49,16 +49,16 @@ function Signup() {
 	}
 
 	//test function M
-	let testSomething = ()=>{
-		let SignUpData = {
-			firstName: firstName,
-			lastName:lastName,
-			email:email,
-			password:password
-		}
-		console.log("test fuction log===");
-		console.log(SignUpData);
-	}
+	// let testSomething = ()=>{
+	// 	let SignUpData = {
+	// 		firstName: firstName,
+	// 		lastName:lastName,
+	// 		email:email,
+	// 		password:password
+	// 	}
+	// 	console.log("test fuction log===");
+	// 	console.log(SignUpData);
+	// }
 	
 	return (
 		<div className='signup_container'>
@@ -118,9 +118,7 @@ function Signup() {
 							Sign Up
 						</button>
 					
-						<button onClick={testSomething}> invoke test function .. {
-							
-						}</button>
+						
 					</form>
 				</div>
 			</div>
