@@ -5,9 +5,30 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 
 
 function UserHome() {
+
+
+    const MySwal = withReactContent(Swal)
+
+    const sweettest = ()=>{
+        MySwal.fire({
+            title: 'Log out?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3bb19b',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              logout()
+            }
+          })
+    }
 
     //toastify
     const notifyerror = (msg) => toast.error(msg);
@@ -98,7 +119,8 @@ function UserHome() {
             theme="light"
              />
 
-            <img src="/logout.png" alt="" title='logout' className='logut-Btn'  onClick={logout}/>
+            <img src="/logout.png" alt="" title='logout' className='logut-Btn' 
+             onClick={ sweettest}/>
 
             <form className='col-12 col-md-8 col-lg-6 application-form' onSubmit={handleSubmit}>
                 <h1 className='mb-5'>Application for incubation</h1>
