@@ -3,7 +3,10 @@
 import React, { useState } from "react";
 import { Outlet,useNavigate } from "react-router-dom";
 
-//import react pro sidebar components
+
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 
 
 import "./Header.css";
@@ -12,6 +15,31 @@ import "./Header.css";
 const Header = () => {
 
     const navigate = useNavigate()
+
+
+
+    
+    const MySwal = withReactContent(Swal)
+
+    const adminLogOutprompt = () => {
+        MySwal.fire({
+            title: 'Log out?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3bb19b',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                adminLogOut()
+            }
+        })
+    }
+
+    const adminLogOut = ()=>{
+        localStorage.removeItem("adminStatus");
+        window.location ="/admin"
+    }
 
     return (
         <>
@@ -33,15 +61,15 @@ const Header = () => {
                         <img src="/file.png"style={{height:"50px",width:"50px"}} alt="" />
                         <span className="sidebar-item">Application List</span>
                     </div>
-                    <div onClick={()=>{navigate('/admin/record-track')}} className="icon" >
+                    {/* <div onClick={()=>{navigate('/admin/record-track')}} className="icon" >
                         <img src="/calendar.png"style={{height:"50px",width:"50px"}} alt="" />
                         <span className="sidebar-item">Record List</span>
-                    </div>
+                    </div> */}
                     <div onClick={()=>{navigate('/admin/booking')}} className="icon" >
                         <img src="/booking.png"style={{height:"50px",width:"50px"}} alt="" />
                         <span className="sidebar-item">Booking</span>
                     </div>
-                    <div className="icon" >
+                    <div onClick={adminLogOutprompt} className="icon" >
                         <img src="/power.png"style={{height:"50px",width:"50px"}} alt="" />
                         <span className="sidebar-item">Log out</span>
                     </div>
