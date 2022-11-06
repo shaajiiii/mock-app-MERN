@@ -51,6 +51,23 @@ router.put('/update-to-approved',async (req,res)=>{
 
 
 
+router.get('/fetch-counts',async (req,res)=>{
+   
+    let newApplications =  await application.find({status:"applied"})
+    let newApplicationCount = newApplications.length
+
+    let pendingAppCount = await application.count({status:"pending"})
+    let approvedAppCount = await application.count({status:"approved"})
+    // console.log(pendingAppCount);
+    if(newApplicationCount){
+        res.json({newApplicationCount,pendingAppCount,approvedAppCount});
+
+    }else{
+        res.send(404)
+    }
+    
+})
+
 
 
 
