@@ -47,6 +47,28 @@ function PendingApplicationTable() {
     }
 
 
+    const rejectApplication = async (_id)=>{
+        //console.log(_id);// ive id ethi
+        let updateData ={
+            doc_Id : _id
+        }
+        try {
+            axios.put("http://localhost:7000/admin-applications/reject-application",updateData).then(()=>{
+                getPendingApplications() 
+                
+
+            })
+            
+            
+        } catch (error) {
+            console.log("axious error logg");
+            if (error) console.log(error);
+        }
+
+
+    }
+
+
     useEffect(() => {
         console.log("use-Effect fired");
         getPendingApplications();
@@ -83,7 +105,10 @@ function PendingApplicationTable() {
                                         <td>
                                             <button style={{marginRight:"2rem"}} type="button" class="btn btn-dark ">Open</button>
                                            {(singleApplication.status==="pending"?
-                                           <button onClick={()=>{updateToApproved(singleApplication._id)}}  type="button" class="btn btn-success"> Approve </button>
+                                           <>
+                                           <button onClick={()=>{if(window.confirm("approve this application?"))updateToApproved(singleApplication._id)}}  type="button" class="btn btn-success mx-2"> Approve </button>
+                                           <button onClick={()=>{if(window.confirm("reject this application?"))rejectApplication(singleApplication._id)}}  type="button" class="btn btn-danger"> Reject </button>
+                                           </>
                                            :
                                            <span style={{color:'green'}}>Already approved</span>)
                                            } 

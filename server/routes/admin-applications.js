@@ -40,6 +40,15 @@ router.put('/update-to-pending',async (req,res)=>{
 })
 
 
+router.put('/reject-application',async (req,res)=>{
+   
+   
+    await application.updateOne({_id:req.body.doc_Id},{$set:{status:"rejected"}})
+    res.status(200).send({msg:"updated the document"});
+    
+})
+
+
 router.put('/update-to-approved',async (req,res)=>{
    
     //console.log("update route..");
