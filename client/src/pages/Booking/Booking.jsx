@@ -77,10 +77,29 @@ function Booking() {
   }, [])
 
 
+  const addRoom = async ()=>{
+
+    try {
+      let res = await axios.put("http://localhost:7000/rooms/add-new-room")
+
+      //call get all rooms here
+      if(res){
+        getAllRooms()
+      }
+
+    } catch (error) {
+      console.log("axious error logg");
+      if (error) console.log(error);
+    }
+
+  }
+
 
   return (
     <div className='rooms-container'>
       <div className="container">
+
+      <button style={{right:"40px",position:"absolute"}} onClick={addRoom} type="button" class="btn btn-primary">Add new room</button>
 
         <h1>Booking Slot</h1>
 

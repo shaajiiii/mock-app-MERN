@@ -42,7 +42,7 @@ router.get('/get-approved-companies', async (req,res)=>{
 
     //filtering
     const companiesTolist =  approvedApplications.filter(n => !alloted.includes(n))
-    console.log(companiesTolist);
+    //console.log(companiesTolist);
     //console.log(approvedApplications);
     if(approvedApplications){
         res.json({approvedApplications:companiesTolist});
@@ -72,6 +72,24 @@ router.post('/book-room', async (req,res)=>{
 })
 
 
+router.put('/add-new-room', async (req, res) => {
+
+
+    let count = await Room.countDocuments()
+    //console.log(count);
+    count = String(count+1)
+
+
+    await new Room({
+        companyName: null,
+        status: "available",
+        no: count
+
+    }).save();
+
+    res.send("ok route set")
+
+})
 
 
 
