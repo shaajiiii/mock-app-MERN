@@ -34,9 +34,18 @@ router.get('/get-approved-companies', async (req,res)=>{
 
     
     let approvedApplications =  await application.find({status:"approved"}).distinct("companyName")
+    let alloted =  await Room.find({status:"booked"}).distinct("companyName")
+
+    // console.log("y mark___________");
+    // console.log(approvedApplications);
+    // console.log(alloted);
+
+    //filtering
+    const companiesTolist =  approvedApplications.filter(n => !alloted.includes(n))
+    console.log(companiesTolist);
     //console.log(approvedApplications);
     if(approvedApplications){
-        res.json({approvedApplications});
+        res.json({approvedApplications:companiesTolist});
 
     }else{
         res.send(404)

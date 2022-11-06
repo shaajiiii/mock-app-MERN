@@ -41,6 +41,7 @@ function Booking() {
 
 
       setRooms(storeRooms)
+      getApprovedCompanies()
 
     } catch (error) {
       console.log("axious error logg");
@@ -108,6 +109,7 @@ function Booking() {
                     <h6>choose a company</h6>
 
                     <select onChange={(e)=>{bookRoom(room.no,e.target.value)}} id="company-list">
+                       <option > select ... </option>
   
                       {
                         approvedCompanies.map((company) => {
