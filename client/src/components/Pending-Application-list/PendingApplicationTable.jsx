@@ -1,7 +1,43 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 function PendingApplicationTable() {
+
+    const MySwal = withReactContent(Swal)
+
+    const approvedPrompt = (arg) => {
+        MySwal.fire({
+            title: 'Approve?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3bb19b',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                updateToApproved(arg)
+            }
+        })
+    }
+
+    const rejectPrompt = (arg) => {
+        MySwal.fire({
+            title: 'Reject?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3bb19b',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                rejectApplication(arg)
+            }
+        })
+    }
+
 
     const [pendingApplications, setPendingApplications] = useState();
     const [singleApplication, setSingleApplications] = useState();
@@ -117,8 +153,8 @@ function PendingApplicationTable() {
                                               onClick={()=>{setSingleApplications(singleApplication)}} >Open</button>
                                            {(singleApplication.status==="pending"?
                                            <>
-                                           <button onClick={()=>{if(window.confirm("approve this application?"))updateToApproved(singleApplication._id)}}  type="button" class="btn btn-success mx-2"> Approve </button>
-                                           <button onClick={()=>{if(window.confirm("reject this application?"))rejectApplication(singleApplication._id)}}  type="button" class="btn btn-danger"> Reject </button>
+                                           <button onClick={()=>{approvedPrompt(singleApplication._id)}} type="button" class="btn btn-success mx-2"> Approve </button>
+                                           <button onClick={()=>{rejectPrompt(singleApplication._id)}}  type="button" class="btn btn-danger"> Reject </button>
                                            </>
                                            :
                                            <span style={{color:'green'}}>Already approved</span>)

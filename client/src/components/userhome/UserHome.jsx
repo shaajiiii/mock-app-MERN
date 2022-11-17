@@ -131,7 +131,7 @@ function UserHome() {
             {showForm ?
 
 
-                <form className='col-12 col-md-8 col-lg-6 application-form' onSubmit={handleSubmit}>
+                <form className='col-12 col-md-8 col-lg-6 uapplication-form' onSubmit={handleSubmit}>
                     <h1 className='mb-5'>Application for incubation</h1>
                     <div className="row">
                         <div className="col-6 mb-3">

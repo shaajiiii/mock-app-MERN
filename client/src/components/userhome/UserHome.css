@@ -1,3 +1,9 @@
+.uapplication-form {
+	background-color: rgb(238, 238, 238);
+	padding: 2rem;
+	border-radius: 10px;
+}
+
 .application-form {
 	background-color: rgb(238, 238, 238);
 	padding: 2rem;
