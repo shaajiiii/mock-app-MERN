@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './UserHome.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -50,7 +50,40 @@ function UserHome() {
     const [Describe_value, setValue] = useState("");
 
 
-    const [showForm, setShowForm] = useState(true)
+    const [showForm, setShowForm] = useState()
+
+
+    const checkingShowForm =async ()=>{
+
+        const usertoken = localStorage.getItem('token') 
+
+        try {
+            let applyResponse = await axios.post('http://localhost:7000/login/check-status',{Id:usertoken})
+            console.log("axios respone in try");
+            if (applyResponse.status === 201) {
+
+                if(applyResponse.data.canApply) setShowForm(true);
+                else setShowForm(false);
+
+
+            }
+        } catch (error) {
+            if (error.response.status === 400) {
+                console.log(error.response.data.error);
+                notifyerror(error.response.data.error)
+            }
+        }
+
+
+    }
+
+
+    useEffect(() => {
+       
+       checkingShowForm();
+
+    }, [])
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()

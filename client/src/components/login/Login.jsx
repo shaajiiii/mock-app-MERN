@@ -58,7 +58,7 @@ function Login() {
             <div className='login_form_container'>
                 <div className='left'>
                     <form className='form_container' onSubmit={handleLogin}>
-                        <h1>Login to Your Account</h1>
+                        <h1>Login </h1>
                         <input
                             type="email"
                             placeholder="Email"

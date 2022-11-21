@@ -69,6 +69,57 @@ router.post('/submit-application', async (req,res)=>{
 })
 
 
+
+
+// checking existing application
+router.post('/check-status',async (req,res)=>{
+
+    console.log("check status fired");
+    console.log(req.body.Id);
+    let id = req.body.Id;
+
+    let user = await User.findById(id);
+    let applications = await application.find({"user_data.firstName":user.firstName ,status:{$ne:"approved"}});
+
+    console.log(user)
+    console.log(applications);
+    
+    if(applications.length == 0){
+        console.log("Form ok , user can apply");
+        res.status(201).send({canApply:true})
+       
+    }else{
+        console.log("Form hidden, user blocked")
+        res.status(201).send({canApply:false})
+    }
+
+
+    // const user = await User.findOne({email:req.body.email})
+    // if(!user){
+    //     return res.status(400).send({ message:"Invalid email or password.."});
+    // }
+
+    // if(user.password!==req.body.password){
+    //     return res.status(400).send({ message:"Invalid email or password.."});
+    // }else{
+    //     res.status(200).send({token:user._id});
+    // }
+
+
+    
+})
+
+
+
+
+
+
+
+
+
+
+
+
 //=============================== APPLICATION DATA VALIDATION//  ^[a-zA-Z0-9_ ]*$
 const validateApplicationData = (applicationData) => {
     const schema = Joi.object({

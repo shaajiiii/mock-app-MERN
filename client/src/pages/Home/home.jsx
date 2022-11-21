@@ -47,50 +47,50 @@ function Home() {
   return (
     <div className='container m-5'>
 
-      <div style={{display:"flex",justifyContent:"space-evenly"}}>
+      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
 
-     
 
-      {newCount &&
 
-        <div class="card text-white bg-danger m-3 col-md-3" >
-          <div class="card-header">New</div>
-          <div class="card-body">
-            <h5 class="card-title">{newCount} New Applications</h5>
-            <p class="card-text">You have {newCount} new applications that needs your attention!</p>
+        {newCount &&
+
+          <div class="card text-white bg-danger m-3 col-md-3" >
+            <div class="card-header">New</div>
+            <div class="card-body">
+              <h5 class="card-title">{newCount} New Applications</h5>
+              <p class="card-text">You have {newCount} new applications that needs your attention!</p>
+            </div>
           </div>
-        </div>
 
-      }
+        }
 
 
-      {pendingCount &&
+        {pendingCount &&
 
-        <div class="card text-white bg-warning m-3 col-md-3" >
-          <div class="card-header">Pending</div>
-          <div class="card-body">
-            <h5 class="card-title">{pendingCount} Pending Applications</h5>
-            <p class="card-text">You have {pendingCount} pending applications that needs to be resolved..</p>
+          <div class="card text-white bg-warning m-3 col-md-3" >
+            <div class="card-header">Pending</div>
+            <div class="card-body">
+              <h5 class="card-title">{pendingCount} Pending Applications</h5>
+              <p class="card-text">You have {pendingCount} pending applications that needs to be resolved..</p>
+            </div>
           </div>
-        </div>
 
-      }
+        }
 
-{approvedCount &&
+        {approvedCount &&
 
-<div class="card text-white bg-success m-3 col-md-3" >
-  <div class="card-header">Approved</div>
-  <div class="card-body">
-    <h5 class="card-title">{approvedCount} Approved Applications</h5>
-    <p class="card-text">Currently there are {approvedCount} companies.. </p>
-  </div>
-</div>
+          <div class="card text-white bg-success m-3 col-md-3" >
+            <div class="card-header">Approved</div>
+            <div class="card-body">
+              <h5 class="card-title">{approvedCount} Approved Applications</h5>
+              <p class="card-text">Currently there are {approvedCount} companies.. </p>
+            </div>
+          </div>
 
-}
-
+        }
 
 
- </div>
+
+      </div>
 
     </div>
   )
