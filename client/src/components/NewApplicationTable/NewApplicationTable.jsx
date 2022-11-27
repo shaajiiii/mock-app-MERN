@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Applications-page.css'
 
-function NewApplicationTable() {
+function NewApplicationTable({initReload}) {
 
     const [applications, setNewApplications] = useState();
 
@@ -35,6 +35,8 @@ function NewApplicationTable() {
         }
         try {
             axios.put("http://localhost:7000/admin-applications/update-to-pending",updateData).then(()=>{
+                //=========change state here
+                initReload()
                 getNewApplications() 
                 
 

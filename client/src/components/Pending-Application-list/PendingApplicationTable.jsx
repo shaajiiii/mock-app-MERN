@@ -4,7 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
-function PendingApplicationTable() {
+function PendingApplicationTable({reloadVal}) {
 
     const MySwal = withReactContent(Swal)
 
@@ -110,7 +110,7 @@ function PendingApplicationTable() {
         console.log("use-Effect fired");
         getPendingApplications();
 
-    }, [])
+    }, [reloadVal]) // dont do this. U had no time. so...
 
 
     return (
@@ -124,7 +124,7 @@ function PendingApplicationTable() {
 
 
         <div className='pending-table-wrap'>
-            <h1 style={{ margin: "1rem 0rem 1rem 0rem " }}> Pending List</h1>
+            <h1 style={{ margin: "1rem 0rem 1rem 0rem " }}> Pending List {reloadVal}</h1>
 
             <div className="table-responsive">
 
